@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     id("com.android.application")
     id("kotlin-android")
@@ -5,13 +7,12 @@ plugins {
     id("dev.flutter.flutter-gradle-plugin")
 }
 
-import java.util.Properties
-
 val keystoreProperties = Properties()
 val keystorePropertiesFile = rootProject.file("key.properties")
 if (keystorePropertiesFile.exists()) {
     keystoreProperties.load(keystorePropertiesFile.inputStream())
 }
+val hasKeystoreProperties = keystorePropertiesFile.exists()
 
 android {
     namespace = "com.ademiralay.game_tetris_new"
@@ -28,17 +29,12 @@ android {
     }
 
     signingConfigs {
-        create("release") {
-            val keyAliasValue = keystoreProperties["keyAlias"] as String?
-            val keyPasswordValue = keystoreProperties["keyPassword"] as String?
-            val storeFileValue = keystoreProperties["storeFile"] as String?
-            val storePasswordValue = keystoreProperties["storePassword"] as String?
-
-            if (!storeFileValue.isNullOrBlank()) {
-                keyAlias = keyAliasValue
-                keyPassword = keyPasswordValue
-                storeFile = file(storeFileValue)
-                storePassword = storePasswordValue
+        if (hasKeystoreProperties) {
+            create("release") {
+                keyAlias = keystoreProperties["keyAlias"] as String
+                keyPassword = keystoreProperties["keyPassword"] as String
+                storeFile = file(keystoreProperties["storeFile"] as String)
+                storePassword = keystoreProperties["storePassword"] as String
             }
         }
     }
@@ -53,7 +49,7 @@ android {
 
     buildTypes {
         release {
-            signingConfig = if (keystorePropertiesFile.exists()) {
+            signingConfig = if (hasKeystoreProperties) {
                 signingConfigs.getByName("release")
             } else {
                 signingConfigs.getByName("debug")
