@@ -38,14 +38,13 @@ jobs:
           test -n "${{ secrets.KEYSTORE_STORE_PASSWORD }}" || (echo "Missing KEYSTORE_STORE_PASSWORD" && exit 1)
 
       - name: Create signing files from secrets
-        working-directory: android
         run: |
-          echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > app/game_tetris.jks
+          echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > android/app/game_tetris.jks
           cat > key.properties <<EOF
           storePassword=${{ secrets.KEYSTORE_STORE_PASSWORD }}
           keyPassword=${{ secrets.KEYSTORE_KEY_PASSWORD }}
           keyAlias=${{ secrets.KEYSTORE_KEY_ALIAS }}
-          storeFile=app/game_tetris.jks
+          storeFile=android/app/game_tetris.jks
           EOF
 
       - name: Build release AAB
