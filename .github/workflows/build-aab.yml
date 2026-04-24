@@ -1,4 +1,4 @@
-name: Build Android AAB
+name: Build Android Artifacts
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build-aab:
+  build-android:
     runs-on: ubuntu-latest
 
     steps:
@@ -51,9 +51,19 @@ jobs:
       - name: Build release AAB
         run: flutter build appbundle --release
 
+      - name: Build release APK
+        run: flutter build apk --release
+
       - name: Upload AAB artifact
         uses: actions/upload-artifact@v4
         with:
           name: app-release-aab
           path: build/app/outputs/bundle/release/*.aab
+          if-no-files-found: error
+
+      - name: Upload APK artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-release-apk
+          path: build/app/outputs/flutter-apk/*.apk
           if-no-files-found: error
