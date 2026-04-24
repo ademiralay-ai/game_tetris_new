@@ -39,7 +39,8 @@ jobs:
 
       - name: Create signing files from secrets
         run: |
-          echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > android/app/game_tetris.jks
+          mkdir -p android/app
+          echo -n "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d > android/app/game_tetris.jks
           cat > android/key.properties <<EOF
           storePassword=${{ secrets.KEYSTORE_STORE_PASSWORD }}
           keyPassword=${{ secrets.KEYSTORE_KEY_PASSWORD }}
