@@ -294,12 +294,11 @@ packages:
     source: hosted
     version: "2.1.5"
   path_provider_android:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
-      name: path_provider_android
-      sha256: f2c65e21139ce2c3dad46922be8272bb5963516045659e71bb16e151c93b580e
-      url: "https://pub.dev"
-    source: hosted
+      path: "local_packages/path_provider_android"
+      relative: true
+    source: path
     version: "2.2.22"
   path_provider_foundation:
     dependency: transitive
@@ -382,12 +381,11 @@ packages:
     source: hosted
     version: "2.5.5"
   shared_preferences_android:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
-      name: shared_preferences_android
-      sha256: e8d4762b1e2e8578fc4d0fd548cebf24afd24f49719c08974df92834565e2c53
-      url: "https://pub.dev"
-    source: hosted
+      path: "local_packages/shared_preferences_android"
+      relative: true
+    source: path
     version: "2.4.23"
   shared_preferences_foundation:
     dependency: transitive
@@ -523,13 +521,13 @@ packages:
     source: hosted
     version: "4.13.1"
   webview_flutter_android:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
       name: webview_flutter_android
-      sha256: f560f57d0f529c1dcdaf4edc3a3217b099560622f9f4a10b6bdbb566553c61ea
+      sha256: d1ee28f44894cbabb1d94cc42f9980297f689ff844d067ec50ff88d86e27d63f
       url: "https://pub.dev"
     source: hosted
-    version: "4.11.0"
+    version: "4.3.0"
   webview_flutter_platform_interface:
     dependency: transitive
     description:
