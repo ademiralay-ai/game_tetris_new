@@ -40,11 +40,11 @@ jobs:
       - name: Create signing files from secrets
         run: |
           echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > android/app/game_tetris.jks
-          cat > key.properties <<EOF
+          cat > android/key.properties <<EOF
           storePassword=${{ secrets.KEYSTORE_STORE_PASSWORD }}
           keyPassword=${{ secrets.KEYSTORE_KEY_PASSWORD }}
           keyAlias=${{ secrets.KEYSTORE_KEY_ALIAS }}
-          storeFile=android/app/game_tetris.jks
+          storeFile=app/game_tetris.jks
           EOF
 
       - name: Build release AAB
